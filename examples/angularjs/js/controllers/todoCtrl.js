@@ -111,6 +111,16 @@ angular.module('todomvc')
 				});
 		};
 
+		$scope.togglePriority = function (todo, priority) {
+			if (angular.isDefined(priority)) {
+				todo.priority = priority;
+			}
+			store.put(todo, todos.indexOf(todo))
+				.then(function success() {}, function error() {
+					todo.priority = !todo.priority;
+				});
+		};
+
 		$scope.clearCompletedTodos = function () {
 			store.clearCompleted();
 		};
